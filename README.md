@@ -1,4 +1,5 @@
-# gitimport – Import python packages directly from a git repository
+# gitimport
+Import python packages directly from a git repository
 
 [![Build Status](https://travis-ci.org/fourplusone/gitimport.svg?branch=master)](https://travis-ci.org/fourplusone/gitimport)
 
