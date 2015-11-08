@@ -8,7 +8,7 @@ setup(
     author_email='mba@fourplusone.de',
     url='https://github.com/fourplusone/gitimport',
     py_modules=['gitimport'],
-    version='1.0.0',
+    version='1.0.1',
     install_requires=['pygit2'],
     license='MIT',
     classifiers=['Development Status :: 4 - Beta', 
