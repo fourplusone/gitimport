@@ -9,7 +9,7 @@ sudo: false
 env: LIBGIT2=~/libgit2/_install/ LD_LIBRARY_PATH=~/libgit2/_install/lib
 
 before_install:
-  - sudo apt-get install cmake
+  - apt-get install cmake
   - pip install cffi # pygit doesn't install cffi automatically
   - "./.travis.sh"
 
