@@ -6,6 +6,7 @@
 ## System Requirements
 
 - Python 3.4 or higher
+- libgit2 installed
 
 ## Installation
 
@@ -13,7 +14,9 @@
 
 `brew install libgit2`
 
-`python3 setup.py install`
+### All Platforms
+
+`pip3 install gitimport`
 
 ## Usage 
 
