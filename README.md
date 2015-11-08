@@ -9,9 +9,10 @@
 
 ## Installation
 
-# On OS X
+### Mac OS X
 
 `brew install libgit2`
+
 `python3 setup.py install`
 
 ## Usage 
