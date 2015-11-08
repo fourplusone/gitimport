@@ -3,6 +3,19 @@
 [![Build Status](https://travis-ci.org/fourplusone/gitimport.svg?branch=master)](https://travis-ci.org/fourplusone/gitimport)
 
 
+## System Requirements
+
+- Python 3.4 or higher
+
+## Installation
+
+# On OS X
+
+`brew install libgit2`
+`python3 setup.py install`
+
+## Usage 
+
 ```python
 import sys
 import gitimport
