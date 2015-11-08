@@ -1,7 +1,10 @@
 language: python
+
 python:
   - "3.4"
   - "3.5"
+
+sudo: false
 
 env: LIBGIT2=~/libgit2/_install/ LD_LIBRARY_PATH=~/libgit2/_install/lib
 
