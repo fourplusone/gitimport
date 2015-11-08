@@ -5,9 +5,14 @@ python:
   - "3.4"
   - "3.5"
 
+env: LIBGIT2=~/libgit2/_install/ LD_LIBRARY_PATH=~/libgit2/_install/lib
+
+before_install:
+  - sudo apt-get install cmake
+  - pip install cffi # pygit doesn't install cffi automatically
+  - "./.travis.sh"
+
 install:
-  # pygit doesn't install cffi automatically
-  - pip install cffi
   - pip install .
 
 script: python test.py
