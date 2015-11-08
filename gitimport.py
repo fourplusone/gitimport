@@ -18,7 +18,11 @@ def split_git_path(path):
 
         if len(path) == 0: break
 
-        git_repo, commit_sha = path.split(GIT_REVISION_SEPARATOR, 1)
+        try:
+            git_repo, commit_sha = path.split(GIT_REVISION_SEPARATOR, 1)
+        except ValueError:
+            # In case the path does not contain a GIT_REVISION_SEPARATOR
+            break
 
         if os.path.isdir(git_repo)  and not os.path.isdir(path):
             try:

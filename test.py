@@ -9,7 +9,8 @@ class GitImporterTests(unittest.TestCase):
         gitimport.add_gitimporter_path_hook()
         repo = pygit2.Repository('.')
         sys.path.insert(0,'.@{}/import_testmodules'.format(repo.revparse_single('HEAD').id))
-
+        sys.path.insert(0,'/a/repo/that/does/not/exist@fffff00')
+        
     def test_import(self):
         import hello
         self.assertTrue(inspect.ismodule(hello))
@@ -26,6 +27,12 @@ class GitImporterTests(unittest.TestCase):
     def test_parent_import(self):
         from mod.submod import parent_importer
         self.assertTrue(inspect.ismodule(parent_importer))
+    
+    def test_importerror(self):
+        try:
+            import does_not_exists
+        except ImportError:
+            pass
 
 
 
