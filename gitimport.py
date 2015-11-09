@@ -64,7 +64,7 @@ class gitimporter(PathEntryFinder):
             tree_entry = self.get_tree_entry(path)
             if tree_entry.type == 'blob':
                 spec = ModuleSpec(modulename,
-                                  GitLoader(tree_entry, self.repo),
+                                  GitLoader(tree_entry, self.repo, self.commit_sha),
                                   is_package=True,
                                   origin=path)
 
@@ -77,23 +77,26 @@ class gitimporter(PathEntryFinder):
             path = tail_modulename + SOURCE_SUFFIX
             tree_entry = self.get_tree_entry(path)
             if tree_entry.type == 'blob':
-                return ModuleSpec(modulename, GitLoader(tree_entry, self.repo), origin=path)
+                return ModuleSpec(modulename, GitLoader(tree_entry, self.repo, self.commit_sha), origin=path)
         except KeyError:
             pass
 
 
 class GitLoader(Loader):
-    def __init__(self, tree_entry, repo):
+    def __init__(self, tree_entry, repo, commit_sha=None):
         self.tree_entry = tree_entry
         self.repo = repo
+        self.commit_sha = commit_sha
 
     def get_code(self):
         return self.repo[self.tree_entry.id].data
 
     def exec_module(self, module):
+        if self.commit_sha is not None:
+            module.__git_commit__ = self.commit_sha
         exec(self.get_code(), module.__dict__)
 
 
-def add_gitimporter_path_hook():
+def add_gitimporter_path_hook(): 
     if gitimporter not in sys.path_hooks:
         sys.path_hooks.append(gitimporter)
