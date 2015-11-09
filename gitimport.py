@@ -97,6 +97,11 @@ class GitLoader(Loader):
         exec(self.get_code(), module.__dict__)
 
 
-def add_gitimporter_path_hook(): 
+def add_gitimporter_path_hook():
     if gitimporter not in sys.path_hooks:
         sys.path_hooks.append(gitimporter)
+
+
+def repository_path(repo, rev='HEAD', in_repo_path=''):
+    path = '{}@{}'.format(repo.path, repo.revparse_single(rev).hex)
+    return os.path.join(path, in_repo_path)
