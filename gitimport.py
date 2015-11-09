@@ -98,10 +98,23 @@ class GitLoader(Loader):
 
 
 def add_gitimporter_path_hook():
+    """
+    Add gitimport to sys.path_hooks.
+    """
     if gitimporter not in sys.path_hooks:
         sys.path_hooks.append(gitimporter)
 
 
 def repository_path(repo, rev='HEAD', in_repo_path=''):
+    """
+    Build a path (for further use in sys.path) from a repository reference
+
+    :param repo: a pygit2 repository object
+    :param rev: the revision which should be used. Acceptable values are all valid git revisions such as 'master',
+    'origin/master', 'HEAD', commit SHAs (see man gitrevisions for more information)
+    :param in_repo_path: path inside the repository from which the modules should be loaded
+    :return:
+    """
+
     path = '{}@{}'.format(repo.path, repo.revparse_single(rev).hex)
     return os.path.join(path, in_repo_path)
