@@ -9,9 +9,21 @@ class GitImporterTests(unittest.TestCase):
         gitimport.add_gitimporter_path_hook()
         self.repo = repo = pygit2.Repository('.')
         self.commit_sha = repo.revparse_single('HEAD').hex
-        sys.path.insert(0, gitimport.repository_path(repo, in_repo_path='import_testmodules'))
         sys.path.insert(0,'/a/repo/that/does/not/exist@fffff00')
-        
+        sys.path.insert(0, gitimport.repository_path(self.repo, in_repo_path='import_testmodules'))
+
+    def test_convenience(self):
+        expected_path = sys.path.pop(0)
+        sys.path.insert(0, gitimport.repository_path(self.repo, in_repo_path='import_testmodules'))
+        self.assertEqual(expected_path, sys.path.pop(0))
+
+        sys.path.insert(0, gitimport.repository_path('.', in_repo_path='import_testmodules'))
+        self.assertEqual(expected_path, sys.path.pop(0))
+
+        gitimport.add_repository_to_path('.', in_repo_path='import_testmodules')
+        self.assertEqual(expected_path, sys.path.pop(0))
+        sys.path.insert(0, expected_path)
+
     def test_import(self):
         import hello
         self.assertTrue(inspect.ismodule(hello))

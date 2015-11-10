@@ -24,20 +24,9 @@ Import python packages directly from a git repository
 ### A simple example
 
 ```python
-import sys
 import gitimport
-import pygit2
 
-# Add gitimport to pythons import machinary
-gitimport.add_gitimporter_path_hook()
-
-repo = pygit2.Repository('/path/to/your/repo')
-
-# Create a path for the current 'demo' branch.
-path = gitimport.repository_path(repo, rev="demo")
-
-# Insert this path into sys.path
-sys.path.insert(0, path)
+path = gitimport.repository_path('/path/to/your/repo', repo, rev="demo")
 
 # Now you can import 'your_module' from the git repository
 import your_module

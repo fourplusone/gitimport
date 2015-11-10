@@ -109,12 +109,29 @@ def repository_path(repo, rev='HEAD', in_repo_path=''):
     """
     Build a path (for further use in sys.path) from a repository reference
 
-    :param repo: a pygit2 repository object
+    :param repo: a pygit2 repository object or a path to a git repository
     :param rev: the revision which should be used. Acceptable values are all valid git revisions such as 'master',
     'origin/master', 'HEAD', commit SHAs (see man gitrevisions for more information)
     :param in_repo_path: path inside the repository from which the modules should be loaded
     :return:
     """
 
+    if isinstance(repo, str):
+        repo = pygit2.Repository(repo)
+
     path = '{}@{}'.format(repo.path, repo.revparse_single(rev).hex)
     return os.path.join(path, in_repo_path)
+
+def add_repository_to_path(repo, rev='HEAD', in_repo_path=''):
+    """
+    Adds a repository reference to sys.path. If gitimporter is not initialized yet, it will also be added to
+    sys.path_hooks
+
+    :param repo: a pygit2 repository object or a path to a git repository
+    :param rev: the revision which should be used. Acceptable values are all valid git revisions such as 'master',
+    'origin/master', 'HEAD', commit SHAs (see man gitrevisions for more information)
+    :param in_repo_path: path inside the repository from which the modules should be loaded
+    :return:
+    """
+    add_gitimporter_path_hook()
+    sys.path.insert(0, repository_path(repo, rev, in_repo_path))
