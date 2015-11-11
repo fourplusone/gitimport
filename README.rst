@@ -35,7 +35,7 @@ A simple example
 
   import gitimport
 
-  path = gitimport.repository_path('/path/to/your/repo', repo, rev="demo")
+  gitimport.add_repository_to_path('/path/to/your/repo', rev='demo')
   
   # Now you can import 'your_module' from the git repository
   
