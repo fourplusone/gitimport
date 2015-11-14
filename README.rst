@@ -4,7 +4,12 @@ gitimport
 
 Import python packages directly from a git repository
 
+
 .. image:: https://travis-ci.org/fourplusone/gitimport.svg?branch=master
+    :target: https://travis-ci.org/fourplusone/gitimport
+
+.. image:: https://coveralls.io/repos/fourplusone/gitimport/badge.svg?branch=master&service=github 
+    :target: https://coveralls.io/github/fourplusone/gitimport?branch=master
 
 System Requirements
 -------------------
